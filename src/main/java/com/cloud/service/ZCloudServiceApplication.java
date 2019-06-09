@@ -1,5 +1,6 @@
 package com.cloud.service;
 
+import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -7,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+@EnableDubbo
 @SpringBootApplication
 public class ZCloudServiceApplication implements CommandLineRunner {
 
@@ -19,7 +21,7 @@ public class ZCloudServiceApplication implements CommandLineRunner {
         ApplicationContext context = springApplication.run(args);
         //赋值ApplicationContext,以便随时手动获取bean
         SpringBeanUtil.setApplicationContext(context);
-        logger.info("======获取到ApplicationContext======" + SpringBeanUtil.getApplicationContext());
+        logger.info("==========获取到ApplicationContext==========" + SpringBeanUtil.getApplicationContext());
     }
 
     /**
@@ -31,7 +33,7 @@ public class ZCloudServiceApplication implements CommandLineRunner {
     @Override
     public void run(String... strings) {
         try {
-            logger.info("============随cloud启动而执行============");
+            logger.info("==========随cloud启动而执行==========");
         } catch (Exception e) {
             logger.error("启动异常", e);
             e.printStackTrace();
