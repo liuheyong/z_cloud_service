@@ -14,7 +14,7 @@ public class ZCloudServiceApplication implements CommandLineRunner {
 
     public static final Logger logger = LoggerFactory.getLogger(ZCloudServiceApplication.class);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         SpringApplication springApplication = new SpringApplication(ZCloudServiceApplication.class);
         //禁止命令行设置环境参数
         springApplication.setAddCommandLineProperties(false);
@@ -22,6 +22,19 @@ public class ZCloudServiceApplication implements CommandLineRunner {
         //赋值ApplicationContext,以便随时手动获取bean
         SpringBeanUtil.setApplicationContext(context);
         logger.info("==========获取到ApplicationContext==========" + SpringBeanUtil.getApplicationContext());
+        //keepRunning();
+    }
+
+    /**
+     * @date: 2019/6/18
+     * @description: 阻塞main方法
+     */
+    private static void keepRunning() throws InterruptedException {
+        logger.info("==========keepRunning==========");
+        Thread currentThread = Thread.currentThread();
+        synchronized (currentThread) {
+            currentThread.wait();
+        }
     }
 
     /**
