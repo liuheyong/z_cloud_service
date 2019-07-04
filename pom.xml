@@ -33,7 +33,7 @@
         </dependency>
         <!--z_cloud_commons-->
         <dependency>
-            <groupId>com.cloud.commons</groupId>
+            <groupId>com.cloud.com.alibabacloud.commons</groupId>
             <artifactId>z_cloud_commons</artifactId>
             <version>${z_cloud_commons-version}</version>
         </dependency>
