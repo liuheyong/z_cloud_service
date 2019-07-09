@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cloud.service.mapper.ECooperateMerMapper">
-    <resultMap id="BaseResultMap" type="com.cloud.com.alibabacloud.commons.dto.ECooperateMer">
+    <resultMap id="BaseResultMap" type="com.cloud.commons.dto.ECooperateMer">
         <id column="COOPERATE_MER_SEQ" property="cooperateMerSeq" jdbcType="VARCHAR"/>
         <result column="AGENT_MER_SEQ" property="agentMerSeq" jdbcType="VARCHAR"/>
         <result column="MER_NAME" property="merName" jdbcType="VARCHAR"/>
@@ -12,10 +12,16 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    COOPERATE_MER_SEQ, AGENT_MER_SEQ, MER_NAME, IMAGE_LINK, MER_LINK, IS_SHOW, E_ORDER
-  </sql>
+        COOPERATE_MER_SEQ,
+        AGENT_MER_SEQ,
+        MER_NAME,
+        IMAGE_LINK,
+        MER_LINK,
+        IS_SHOW,
+        E_ORDER
+    </sql>
 
-    <select id="selectECooperateMerInfo" resultMap="BaseResultMap" parameterType="com.cloud.com.alibabacloud.commons.dto.ECooperateMer">
+    <select id="selectECooperateMerInfo" resultMap="BaseResultMap" parameterType="com.cloud.commons.dto.ECooperateMer">
         SELECT
         <include refid="Base_Column_List"/>
         FROM E_COOPERATE_MER
@@ -45,7 +51,7 @@
     </select>
 
     <select id="queryECooperateMerListPage" resultMap="BaseResultMap"
-            parameterType="com.cloud.com.alibabacloud.commons.dto.ECooperateMer">
+            parameterType="com.cloud.commons.dto.ECooperateMer">
         SELECT
         <include refid="Base_Column_List"/>
         FROM E_COOPERATE_MER

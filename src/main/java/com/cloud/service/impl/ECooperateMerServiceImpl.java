@@ -19,7 +19,7 @@ import java.util.Optional;
  * @description: ECooperateMerServiceImpl
  **/
 @Component
-@Service(interfaceClass = ECooperateMerService.class, version = "1.0.0", timeout = 60000)
+@Service(interfaceClass = ECooperateMerService.class, version = "${dubbo.service.version}", timeout = 60000)
 public class ECooperateMerServiceImpl implements ECooperateMerService {
 
     private static final Logger logger = LoggerFactory.getLogger(ECooperateMerServiceImpl.class);
