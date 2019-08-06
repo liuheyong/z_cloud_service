@@ -3,7 +3,6 @@ package com.cloud.service;
 import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,11 +19,11 @@ public class ZCloudServiceApplication implements CommandLineRunner {
     //@NacosInjected
     //private NamingService namingService;
 
-    @Value("${server.port}")
-    private int serverPort;
+//    @Value("${server.port}")
+//    private int serverPort;
 
-    @Value("${spring.application.name}")
-    private String applicationName;
+//    @Value("${spring.application.name}")
+//    private String applicationName;
 
     public static void main(String[] args) throws InterruptedException {
         SpringApplication springApplication = new SpringApplication(ZCloudServiceApplication.class);
