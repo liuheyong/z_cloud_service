@@ -8,7 +8,7 @@ package com.cloud.service.test;
 public class TestMain {
 
     public static void main(String[] args) {
-        System.out.println("ss");
+        System.out.println("ss.sd.sfd.sdf".lastIndexOf("."));
     }
 
 }
