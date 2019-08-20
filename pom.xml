@@ -118,6 +118,26 @@
             <artifactId>curator-framework</artifactId>
             <version>2.5.0</version>
         </dependency>
+        <!--
+                Reflections库实现包扫描（扫描某个包中某个接口实现、注解等）
+        -->
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.11</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>21.0</version>
+        </dependency>
+        <!--Google 的Protocol-->
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.5.1</version>
+        </dependency>
     </dependencies>
 
     <build>

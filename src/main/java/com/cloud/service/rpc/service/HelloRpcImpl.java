@@ -1,6 +1,4 @@
-package com.cloud.service.rpc.impl;
-
-import com.cloud.service.rpc.service.HelloRPC;
+package com.cloud.service.rpc.service;
 
 /**
  * @author: HeYongLiu
@@ -10,6 +8,6 @@ import com.cloud.service.rpc.service.HelloRPC;
 public class HelloRpcImpl implements HelloRPC {
     @Override
     public String hello(String name) {
-        return "hello," + name;
+        return "hello," + name + "(服务端)";
     }
 }

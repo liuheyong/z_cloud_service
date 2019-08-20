@@ -1,4 +1,4 @@
-package com.cloud.service.rpc.dto;
+package com.cloud.service.rpc.serviceSub;
 
 import java.io.Serializable;
 

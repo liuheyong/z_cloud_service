@@ -81,7 +81,7 @@
         ORDER BY COOPERATE_MER_SEQ DESC
     </select>
 
-    <!--<cache type="com.boot.service.RedisCache.SecondRedisCache" eviction="FIFO" flushInterval="60000" readOnly="true"
+    <!--<cache type="com.boot.client.RedisCache.SecondRedisCache" eviction="FIFO" flushInterval="60000" readOnly="true"
            size="1024"/>-->
 
     <!--<select id="queryNewECooperateMer" resultMap="BaseResultMap" parameterType="com.bee.odm.domain.ECooperateMerEntity" >

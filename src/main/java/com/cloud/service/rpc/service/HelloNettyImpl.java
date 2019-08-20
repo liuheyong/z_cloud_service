@@ -1,6 +1,4 @@
-package com.cloud.service.rpc.impl;
-
-import com.cloud.service.rpc.service.HelloNetty;
+package com.cloud.service.rpc.service;
 
 /**
  * @author: HeYongLiu
@@ -10,6 +8,6 @@ import com.cloud.service.rpc.service.HelloNetty;
 public class HelloNettyImpl implements HelloNetty {
     @Override
     public String hello() {
-        return "----> hello,netty <---";
+        return "----> hello,netty(服务端) <---";
     }
 }
