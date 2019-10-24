@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration>
+<configuration debug="true" scan="true" scanPeriod="40 seconds">
+    <springProperty scope="scope" name="log.base" source="log.base"/>
+    <springProperty scope="scope" name="log.name" source="log.name"/>
+    <Property name="log.base" value="${log.base}"/>
+    <Property name="log.name" value="${log.name}"/>
+    <contextName>${log.name}</contextName>
+    <jmxConfigurator/>
+    <!-- 控制台输出日志-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>UTF-8</charset>
+            <pattern>[${log.name}] %-5level %d{yyyy-MM-dd HH:mm:ss} [%thread] %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!-- 文件输出日志 (文件大小策略进行文件输出，超过指定大小对文件备份) -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <File>${log.base}/${log.name}.log</File>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>UTF-8</charset>
+            <Pattern>[${log.name}] %-5level %d{yyyy-MM-dd HH:mm:ss} [%thread] %logger - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+    <logger name="org.apache.zookeeper" additivity="true" level="INFO"/>
+    <logger name="com.alibaba.dubbo.registry.zookeeper.ZookeeperRegistry" additivity="true" level="ERROR"/>
+    <logger name="com.alibaba.dubbo.config.AbstractConfig" additivity="true" level="ERROR"/>
+    <logger name="com.alibaba.dubbo" additivity="true" level="ERROR"/>
+    <logger name="org.springframework.beans" additivity="true" level="INFO"/>
+    <logger name="org.springframework.amqp.rabbit.listener.BlockingQueueConsumer" additivity="true" level="INFO"/>
+    <logger name="druid.sql.Statement" additivity="true" level="INFO"/>
+    <logger name="druid.sql.Connection" additivity="true" level="INFO"/>
+    <logger name="druid.sql.ResultSet" additivity="true" level="INFO"/>
+    <logger name="org.mongodb.driver" additivity="true" level="INFO"/>
+
+</configuration>

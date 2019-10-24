@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cloud.service.mapper.ECooperateMerMapper">
+    <resultMap id="BaseResultMap" type="com.cloud.commons.dto.ECooperateMer">
+        <id column="COOPERATE_MER_SEQ" property="cooperateMerSeq" jdbcType="VARCHAR"/>
+        <result column="AGENT_MER_SEQ" property="agentMerSeq" jdbcType="VARCHAR"/>
+        <result column="MER_NAME" property="merName" jdbcType="VARCHAR"/>
+        <result column="IMAGE_LINK" property="imageLink" jdbcType="VARCHAR"/>
+        <result column="MER_LINK" property="merLink" jdbcType="VARCHAR"/>
+        <result column="IS_SHOW" property="isShow" jdbcType="CHAR"/>
+        <result column="E_ORDER" property="eOrder" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        COOPERATE_MER_SEQ,
+        AGENT_MER_SEQ,
+        MER_NAME,
+        IMAGE_LINK,
+        MER_LINK,
+        IS_SHOW,
+        E_ORDER
+    </sql>
+
+    <select id="selectECooperateMerInfo" resultMap="BaseResultMap" parameterType="com.cloud.commons.dto.ECooperateMer">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM E_COOPERATE_MER
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="cooperateMerSeq != null and cooperateMerSeq != ''">
+                AND COOPERATE_MER_SEQ = #{cooperateMerSeq,jdbcType=VARCHAR}
+            </if>
+            <if test="agentMerSeq != null and agentMerSeq != ''">
+                AND AGENT_MER_SEQ = #{agentMerSeq,jdbcType=VARCHAR}
+            </if>
+            <if test="merName != null and merName != ''">
+                AND MER_NAME = #{merName,jdbcType=VARCHAR}
+            </if>
+            <if test="imageLink != null and imageLink != ''">
+                AND IMAGE_LINK = #{imageLink,jdbcType=VARCHAR}
+            </if>
+            <if test="merLink != null and merLink != ''">
+                AND MER_LINK = #{merLink,jdbcType=VARCHAR}
+            </if>
+            <if test="isShow != null and isShow != ''">
+                AND IS_SHOW = #{isShow,jdbcType=CHAR}
+            </if>
+            <if test="eOrder != null and eOrder != ''">
+                AND E_ORDER = #{eOrder,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryECooperateMerListPage" resultMap="BaseResultMap"
+            parameterType="com.cloud.commons.dto.ECooperateMer">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM E_COOPERATE_MER
+        <where>
+            <if test="cooperateMerSeq != null and cooperateMerSeq != ''">
+                AND COOPERATE_MER_SEQ = #{cooperateMerSeq,jdbcType=VARCHAR}
+            </if>
+            <if test="agentMerSeq != null and agentMerSeq != ''">
+                AND AGENT_MER_SEQ = #{agentMerSeq,jdbcType=VARCHAR}
+            </if>
+            <if test="merName != null and merName != ''">
+                AND MER_NAME = #{merName,jdbcType=VARCHAR}
+            </if>
+            <if test="imageLink != null and imageLink != ''">
+                AND IMAGE_LINK = #{imageLink,jdbcType=VARCHAR}
+            </if>
+            <if test="merLink != null and merLink != ''">
+                AND MER_LINK = #{merLink,jdbcType=VARCHAR}
+            </if>
+            <if test="isShow != null and isShow != ''">
+                AND IS_SHOW = #{isShow,jdbcType=CHAR}
+            </if>
+            <if test="eOrder != null and eOrder != ''">
+                AND E_ORDER = #{eOrder,jdbcType=INTEGER}
+            </if>
+        </where>
+        ORDER BY COOPERATE_MER_SEQ DESC
+    </select>
+
+    <!--<cache type="com.boot.client.RedisCache.SecondRedisCache" eviction="FIFO" flushInterval="60000" readOnly="true"
+           size="1024"/>-->
+
+    <!--<select id="queryNewECooperateMer" resultMap="BaseResultMap" parameterType="com.bee.odm.domain.ECooperateMerEntity" >
+        SELECT *  FROM E_COOPERATE_MER  WHERE AGENT_MER_SEQ = #{agentMerSeq,jdbcType=VARCHAR}  ORDER BY E_ORDER DESC LIMIT 1
+    </select>
+
+    <select id="queryECooperateMerOrderListPage" resultMap="BaseResultMap" parameterType="com.bee.odm.domain.ECooperateMerEntity" >
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM E_COOPERATE_MER
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if maintest="cooperateMerSeq != null and cooperateMerSeq != ''" >
+                AND COOPERATE_MER_SEQ = #{cooperateMerSeq,jdbcType=VARCHAR}
+            </if>
+            <if maintest="agentMerSeq != null and agentMerSeq != ''" >
+                AND AGENT_MER_SEQ = #{agentMerSeq,jdbcType=VARCHAR}
+            </if>
+            <if maintest="merName != null and merName != ''" >
+                AND MER_NAME = #{merName,jdbcType=VARCHAR}
+            </if>
+            <if maintest="imageLink != null and imageLink != ''" >
+                AND IMAGE_LINK = #{imageLink,jdbcType=VARCHAR}
+            </if>
+            <if maintest="merLink != null and merLink != ''" >
+                AND MER_LINK = #{merLink,jdbcType=VARCHAR}
+            </if>
+            <if maintest="isShow != null and isShow != ''" >
+                AND IS_SHOW = #{isShow,jdbcType=CHAR}
+            </if>
+            <if maintest="eOrder != null and eOrder != ''" >
+                AND E_ORDER = #{eOrder,jdbcType=INTEGER}
+            </if>
+        </trim>
+        ORDER BY E_ORDER DESC
+    </select>
+
+    <delete id="deleteECooperateMerInfo" parameterType="com.bee.odm.domain.ECooperateMerEntity">
+    delete from E_COOPERATE_MER
+    where COOPERATE_MER_SEQ = #{cooperateMerSeq,jdbcType=VARCHAR}
+  </delete>
+
+    <insert id="addECooperateMerInfo" parameterType="com.bee.odm.domain.ECooperateMerEntity">
+        insert into E_COOPERATE_MER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if maintest="cooperateMerSeq != null and cooperateMerSeq != ''">
+                COOPERATE_MER_SEQ,
+            </if>
+            <if maintest="merName != null and merName != ''">
+                MER_NAME,
+            </if>
+            <if maintest="imageLink != null and imageLink != ''">
+                IMAGE_LINK,
+            </if>
+            <if maintest="merLink != null and merLink != ''">
+                MER_LINK,
+            </if>
+            <if maintest="isShow != null and isShow != ''">
+                IS_SHOW,
+            </if>
+            <if maintest="agentMerSeq != null and agentMerSeq != ''" >
+                AGENT_MER_SEQ,
+            </if>
+            <if maintest="eOrder != null and eOrder != ''">
+                E_ORDER,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if maintest="cooperateMerSeq != null and cooperateMerSeq != ''">
+                #{cooperateMerSeq,jdbcType=VARCHAR},
+            </if>
+            <if maintest="merName != null and merName != ''">
+                #{merName,jdbcType=VARCHAR},
+            </if>
+            <if maintest="imageLink != null and imageLink != ''">
+                #{imageLink,jdbcType=VARCHAR},
+            </if>
+            <if maintest="merLink != null and merLink != ''">
+                #{merLink,jdbcType=VARCHAR},
+            </if>
+            <if maintest="isShow != null and isShow != ''">
+                #{isShow,jdbcType=CHAR},
+            </if>
+            <if maintest="agentMerSeq != null and agentMerSeq != ''" >
+                #{agentMerSeq,jdbcType=VARCHAR},
+            </if>
+            <if maintest="eOrder != null and eOrder != ''">
+                #{eOrder,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateECooperateMerInfo" parameterType="com.bee.odm.domain.ECooperateMerEntity">
+        update E_COOPERATE_MER
+        <set>
+            <if maintest="merName != null and merName != ''">
+                MER_NAME = #{merName,jdbcType=VARCHAR},
+            </if>
+            <if maintest="imageLink != null and imageLink != ''">
+                IMAGE_LINK = #{imageLink,jdbcType=VARCHAR},
+            </if>
+            <if maintest="merLink != null and merLink != ''">
+                MER_LINK = #{merLink,jdbcType=VARCHAR},
+            </if>
+            <if maintest="isShow != null  and isShow != ''">
+                IS_SHOW = #{isShow,jdbcType=CHAR},
+            </if>
+            <if maintest="eOrder != null and eOrder != ''">
+                E_ORDER = #{eOrder,jdbcType=INTEGER},
+            </if>
+        </set>
+        where COOPERATE_MER_SEQ = #{cooperateMerSeq,jdbcType=VARCHAR}
+    </update>
+
+    <select id="queryECooperateMerInfo" parameterType="com.bee.odm.domain.ECooperateMerEntity" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM E_COOPERATE_MER
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if maintest="cooperateMerSeq != null and cooperateMerSeq != ''" >
+                AND COOPERATE_MER_SEQ = #{cooperateMerSeq,jdbcType=VARCHAR}
+            </if>
+            <if maintest="agentMerSeq != null and agentMerSeq != ''" >
+                AND AGENT_MER_SEQ = #{agentMerSeq,jdbcType=VARCHAR}
+            </if>
+            <if maintest="merName != null and merName != ''" >
+                AND MER_NAME = #{merName,jdbcType=VARCHAR}
+            </if>
+            <if maintest="imageLink != null and imageLink != ''" >
+                AND IMAGE_LINK = #{imageLink,jdbcType=VARCHAR}
+            </if>
+            <if maintest="merLink != null and merLink != ''" >
+                AND MER_LINK = #{merLink,jdbcType=VARCHAR}
+            </if>
+            <if maintest="isShow != null and isShow != ''" >
+                AND IS_SHOW = #{isShow,jdbcType=CHAR}
+            </if>
+            <if maintest="eOrder != null and eOrder != ''" >
+                AND E_ORDER = #{eOrder,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryEcooperateMerInfoByUp" resultMap="BaseResultMap" parameterType="com.bee.odm.domain.ECooperateMerEntity" >
+        SELECT *
+        FROM E_COOPERATE_MER
+        WHERE AGENT_MER_SEQ = #{agentMerSeq,jdbcType=VARCHAR} AND E_ORDER <![CDATA[>]]> #{eOrder,jdbcType=INTEGER}
+        ORDER BY E_ORDER ASC LIMIT 1
+    </select>
+
+    <select id="queryEcooperateMerInfoByDown" resultMap="BaseResultMap" parameterType="com.bee.odm.domain.ECooperateMerEntity" >
+        SELECT *
+        FROM E_COOPERATE_MER
+        WHERE E_ORDER <![CDATA[<]]> #{eOrder,jdbcType=INTEGER} AND AGENT_MER_SEQ = #{agentMerSeq,jdbcType=VARCHAR}
+        ORDER BY E_ORDER DESC LIMIT 1
+    </select>-->
+
+</mapper>
