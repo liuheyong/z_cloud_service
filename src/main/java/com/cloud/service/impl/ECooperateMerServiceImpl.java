@@ -8,10 +8,12 @@ import com.cloud.service.mapper.ECooperateMerMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author: LiuHeYong
@@ -26,10 +28,13 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
 
     @Autowired
     private ECooperateMerMapper eCooperateMerMapper;
+    @Autowired
+    RedisTemplate redisTemplate;
 
     @Override
     public ECooperateMer queryECooperateMerInfo(ECooperateMer eCooperateMer) {
-        Optional<ECooperateMer> optDto = Optional.ofNullable(Optional.ofNullable(eCooperateMerMapper.selectECooperateMerInfo(eCooperateMer)).orElseGet(ECooperateMer::new));
+        Optional<ECooperateMer> optDto =
+                Optional.ofNullable(Optional.ofNullable(eCooperateMerMapper.selectECooperateMerInfo(eCooperateMer)).orElseGet(ECooperateMer::new));
         return optDto.get();
     }
 
@@ -37,14 +42,13 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
     public QueryECooperateMerResponse queryECooperateMerListPage(ECooperateMer eCooperateMer) throws Exception {
         QueryECooperateMerResponse response = new QueryECooperateMerResponse();
         try {
-            List<ECooperateMer> eList = null;
+            List<ECooperateMer> eList = (List<ECooperateMer>) redisTemplate.opsForValue().get("eList");
             if (eList == null) {
                 synchronized (this) {
                     if (eList == null) {
                         eList = eCooperateMerMapper.queryECooperateMerListPage();
+                        redisTemplate.opsForValue().set("eList",eList,60, TimeUnit.SECONDS);
                         logger.info("从数据库中获取的数据");
-                    } else {
-                        logger.info("从缓存中获取的数据");
                     }
                 }
             } else {
