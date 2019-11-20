@@ -7,11 +7,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.RestController;
 
 @EnableDubbo
 @RestController
 @SpringBootApplication
+@EnableAsync(proxyTargetClass = true)
 public class ZCloudServiceApplication implements CommandLineRunner {
 
     public static final Logger logger = LoggerFactory.getLogger(ZCloudServiceApplication.class);
