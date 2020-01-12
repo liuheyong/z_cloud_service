@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableDubbo
 @RestController
 @SpringBootApplication
-@EnableAsync(proxyTargetClass = true)
 public class ZCloudServiceApplication implements CommandLineRunner {
 
     public static final Logger logger = LoggerFactory.getLogger(ZCloudServiceApplication.class);
@@ -33,8 +32,8 @@ public class ZCloudServiceApplication implements CommandLineRunner {
         springApplication.setAddCommandLineProperties(false);
         ApplicationContext context = springApplication.run(args);
         //赋值ApplicationContext,以便随时手动获取bean
-        SpringBeanUtil.setApplicationContext(context);
-        logger.info("==========获取到ApplicationContext==========" + SpringBeanUtil.getApplicationContext());
+        SpringUtil.setApplicationContext(context);
+        logger.info("==========获取到ApplicationContext==========" + SpringUtil.getApplicationContext());
         //keepRunning();
     }
 
