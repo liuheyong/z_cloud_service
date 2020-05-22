@@ -1,6 +1,7 @@
 package com.cloud.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.alibaba.dubbo.rpc.RpcContext;
 import com.cloud.commons.dto.ECooperateMer;
 import com.cloud.commons.response.QueryECooperateMerResponse;
 import com.cloud.commons.service.ECooperateMerService;
@@ -42,6 +43,7 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
     public QueryECooperateMerResponse queryECooperateMerListPage(ECooperateMer eCooperateMer) throws Exception {
         QueryECooperateMerResponse response = new QueryECooperateMerResponse();
         try {
+            logger.info(String.valueOf(RpcContext.getContext().getAttachment("myKey")));
             List<ECooperateMer> eList = (List<ECooperateMer>) redisTemplate.opsForValue().get("eList");
             if (eList == null) {
                 synchronized (this) {
