@@ -1,13 +1,16 @@
 package com.cloud.service;
 
 import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RestController;
 
 @EnableDubbo
@@ -35,6 +38,12 @@ public class ZCloudServiceApplication implements CommandLineRunner {
         SpringUtil.setApplicationContext(context);
         logger.info("==========获取到ApplicationContext==========" + SpringUtil.getApplicationContext());
         //keepRunning();
+    }
+
+    @Bean
+    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
+        //return new SqlSessionTemplate(sqlSessionFactory);   // 不使用批处理 SqlSession, 推荐用这种方式
+        return new SqlSessionTemplate(sqlSessionFactory, ExecutorType.BATCH); // 使用批处理 SqlSession, 不推荐用这种方式, 如果主键自增, 批处理方式无法获取到自增的id
     }
 
     /*@PostConstruct
