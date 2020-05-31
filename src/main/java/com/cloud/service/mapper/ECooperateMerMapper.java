@@ -19,6 +19,13 @@ public interface ECooperateMerMapper {
     /**
      * @date: 2019/5/24
      * @param: [eCooperateMer]
+     * @description: 插入
+     */
+    void addECooperateMerInfo(ECooperateMer eCooperateMer);
+
+    /**
+     * @date: 2019/5/24
+     * @param: [eCooperateMer]
      * @return: com.boot.com.alibabacloud.commons.serviceSub.ECooperateMer
      * @description: 列表
      */

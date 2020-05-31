@@ -6,12 +6,17 @@ import com.cloud.commons.dto.ECooperateMer;
 import com.cloud.commons.response.QueryECooperateMerResponse;
 import com.cloud.commons.service.ECooperateMerService;
 import com.cloud.service.mapper.ECooperateMerMapper;
+import com.cloud.service.utils.UUIDUtil;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
@@ -31,11 +36,12 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
     private ECooperateMerMapper eCooperateMerMapper;
     @Autowired
     RedisTemplate redisTemplate;
+    @Autowired
+    SqlSessionTemplate sqlSessionTemplate;
 
     @Override
     public ECooperateMer queryECooperateMerInfo(ECooperateMer eCooperateMer) {
-        Optional<ECooperateMer> optDto =
-                Optional.ofNullable(Optional.ofNullable(eCooperateMerMapper.selectECooperateMerInfo(eCooperateMer)).orElseGet(ECooperateMer::new));
+        Optional<ECooperateMer> optDto = Optional.ofNullable(Optional.ofNullable(eCooperateMerMapper.selectECooperateMerInfo(eCooperateMer)).orElseGet(ECooperateMer::new));
         return optDto.get();
     }
 
@@ -43,6 +49,26 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
     public QueryECooperateMerResponse queryECooperateMerListPage(ECooperateMer eCooperateMer) throws Exception {
         QueryECooperateMerResponse response = new QueryECooperateMerResponse();
         try {
+            // 批量插入数据测试
+            List<ECooperateMer> ecList = new ArrayList<>();
+            for (int i = 0; i < 10000; i++) {
+                ECooperateMer mer = new ECooperateMer(UUIDUtil.getUNIDX("EC", 30), "A2019022200000001", "测试数据添加", "1556442573307.jpg", "https://www.baidu.com", "1", 12);
+                ecList.add(mer);
+            }
+            SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH, false);
+            ECooperateMerMapper mapper = sqlSession.getMapper(ECooperateMerMapper.class);
+            long startTime = System.currentTimeMillis();
+            ecList.stream().forEach(item -> {
+                try {
+                    mapper.addECooperateMerInfo(item);
+                } catch (Exception e) {
+                    sqlSession.rollback();
+                    logger.error(e.getMessage(), e);
+                }
+            });
+            sqlSession.commit();
+            long endTime = System.currentTimeMillis();
+            logger.info("=======================批量插入数据测试耗时=======================" + (endTime - startTime));
             logger.info(String.valueOf(RpcContext.getContext().getAttachment("myKey")));
             List<ECooperateMer> eList = (List<ECooperateMer>) redisTemplate.opsForValue().get("eList");
             if (eList == null) {
@@ -50,7 +76,7 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
                     eList = (List<ECooperateMer>) redisTemplate.opsForValue().get("eList");
                     if (eList == null) {
                         eList = eCooperateMerMapper.queryECooperateMerListPage();
-                        redisTemplate.opsForValue().set("eList",eList,60, TimeUnit.SECONDS);
+                        redisTemplate.opsForValue().set("eList", eList, 60, TimeUnit.SECONDS);
                         logger.info("从数据库中获取的数据");
                     }
                 }

@@ -81,6 +81,56 @@
         ORDER BY COOPERATE_MER_SEQ DESC
     </select>
 
+    <insert id="addECooperateMerInfo" parameterType="com.cloud.commons.dto.ECooperateMer">
+        insert into E_COOPERATE_MER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cooperateMerSeq != null and cooperateMerSeq != ''">
+                COOPERATE_MER_SEQ,
+            </if>
+            <if test="merName != null and merName != ''">
+                MER_NAME,
+            </if>
+            <if test="imageLink != null and imageLink != ''">
+                IMAGE_LINK,
+            </if>
+            <if test="merLink != null and merLink != ''">
+                MER_LINK,
+            </if>
+            <if test="isShow != null and isShow != ''">
+                IS_SHOW,
+            </if>
+            <if test="agentMerSeq != null and agentMerSeq != ''" >
+                AGENT_MER_SEQ,
+            </if>
+            <if test="eOrder != null and eOrder != ''">
+                E_ORDER,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cooperateMerSeq != null and cooperateMerSeq != ''">
+                #{cooperateMerSeq,jdbcType=VARCHAR},
+            </if>
+            <if test="merName != null and merName != ''">
+                #{merName,jdbcType=VARCHAR},
+            </if>
+            <if test="imageLink != null and imageLink != ''">
+                #{imageLink,jdbcType=VARCHAR},
+            </if>
+            <if test="merLink != null and merLink != ''">
+                #{merLink,jdbcType=VARCHAR},
+            </if>
+            <if test="isShow != null and isShow != ''">
+                #{isShow,jdbcType=CHAR},
+            </if>
+            <if test="agentMerSeq != null and agentMerSeq != ''" >
+                #{agentMerSeq,jdbcType=VARCHAR},
+            </if>
+            <if test="eOrder != null and eOrder != ''">
+                #{eOrder,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
     <!--<cache type="com.boot.client.RedisCache.SecondRedisCache" eviction="FIFO" flushInterval="60000" readOnly="true"
            size="1024"/>-->
 
@@ -121,57 +171,7 @@
     <delete id="deleteECooperateMerInfo" parameterType="com.bee.odm.domain.ECooperateMerEntity">
     delete from E_COOPERATE_MER
     where COOPERATE_MER_SEQ = #{cooperateMerSeq,jdbcType=VARCHAR}
-  </delete>
-
-    <insert id="addECooperateMerInfo" parameterType="com.bee.odm.domain.ECooperateMerEntity">
-        insert into E_COOPERATE_MER
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if maintest="cooperateMerSeq != null and cooperateMerSeq != ''">
-                COOPERATE_MER_SEQ,
-            </if>
-            <if maintest="merName != null and merName != ''">
-                MER_NAME,
-            </if>
-            <if maintest="imageLink != null and imageLink != ''">
-                IMAGE_LINK,
-            </if>
-            <if maintest="merLink != null and merLink != ''">
-                MER_LINK,
-            </if>
-            <if maintest="isShow != null and isShow != ''">
-                IS_SHOW,
-            </if>
-            <if maintest="agentMerSeq != null and agentMerSeq != ''" >
-                AGENT_MER_SEQ,
-            </if>
-            <if maintest="eOrder != null and eOrder != ''">
-                E_ORDER,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if maintest="cooperateMerSeq != null and cooperateMerSeq != ''">
-                #{cooperateMerSeq,jdbcType=VARCHAR},
-            </if>
-            <if maintest="merName != null and merName != ''">
-                #{merName,jdbcType=VARCHAR},
-            </if>
-            <if maintest="imageLink != null and imageLink != ''">
-                #{imageLink,jdbcType=VARCHAR},
-            </if>
-            <if maintest="merLink != null and merLink != ''">
-                #{merLink,jdbcType=VARCHAR},
-            </if>
-            <if maintest="isShow != null and isShow != ''">
-                #{isShow,jdbcType=CHAR},
-            </if>
-            <if maintest="agentMerSeq != null and agentMerSeq != ''" >
-                #{agentMerSeq,jdbcType=VARCHAR},
-            </if>
-            <if maintest="eOrder != null and eOrder != ''">
-                #{eOrder,jdbcType=INTEGER},
-            </if>
-        </trim>
-    </insert>
+    </delete>
 
     <update id="updateECooperateMerInfo" parameterType="com.bee.odm.domain.ECooperateMerEntity">
         update E_COOPERATE_MER
