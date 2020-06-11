@@ -51,7 +51,7 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
         try {
             // 批量插入数据测试
             List<ECooperateMer> ecList = new ArrayList<>();
-            for (int i = 0; i < 10000; i++) {
+            for (int i = 0; i < 100000; i++) {
                 ECooperateMer mer = new ECooperateMer(UUIDUtil.getUNIDX("EC", 30), "A2019022200000001", "测试数据添加", "1556442573307.jpg", "https://www.baidu.com", "1", 12);
                 ecList.add(mer);
             }
@@ -68,7 +68,7 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
             });
             sqlSession.commit();
             long endTime = System.currentTimeMillis();
-            logger.info("=======================批量插入数据测试耗时=======================" + (endTime - startTime));
+            System.out.println("==============批量插入"+ ecList.size() +"条数据测试耗时==============" + (endTime - startTime));
             logger.info(String.valueOf(RpcContext.getContext().getAttachment("myKey")));
             List<ECooperateMer> eList = (List<ECooperateMer>) redisTemplate.opsForValue().get("eList");
             if (eList == null) {
@@ -83,7 +83,7 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
             } else {
                 logger.info("从缓存中获取的数据");
             }
-            response.seteCooperateMerList(eList);
+            response.seteCooperateMerList(eList.subList(0, 9));
             return response;
         } catch (Exception e) {
             logger.error("系统异常", e);
