@@ -46,6 +46,7 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
     }
 
     @Override
+    // @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public QueryECooperateMerResponse queryECooperateMerListPage(ECooperateMer eCooperateMer) throws Exception {
         QueryECooperateMerResponse response = new QueryECooperateMerResponse();
         try {
