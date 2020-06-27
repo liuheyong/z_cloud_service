@@ -77,7 +77,7 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
                     eList = (List<ECooperateMer>) redisTemplate.opsForValue().get("eList");
                     if (eList == null) {
                         eList = eCooperateMerMapper.queryECooperateMerListPage();
-                        redisTemplate.opsForValue().set("eList", eList, 60, TimeUnit.SECONDS);
+                        redisTemplate.opsForValue().set("eList", eList, 60 * 10, TimeUnit.SECONDS);
                         logger.info("从数据库中获取的数据");
                     }
                 }
