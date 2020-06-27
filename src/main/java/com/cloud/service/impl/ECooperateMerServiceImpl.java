@@ -15,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +48,7 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
     }
 
     @Override
-    // @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public QueryECooperateMerResponse queryECooperateMerListPage(ECooperateMer eCooperateMer) throws Exception {
         QueryECooperateMerResponse response = new QueryECooperateMerResponse();
         try {
