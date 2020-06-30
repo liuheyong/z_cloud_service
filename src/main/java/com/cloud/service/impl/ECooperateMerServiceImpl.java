@@ -42,13 +42,25 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
     SqlSessionTemplate sqlSessionTemplate;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    public void addECooperateMerInfo(ECooperateMer eCooperateMer) throws Exception {
+        try {
+            eCooperateMerMapper.addECooperateMerInfo(eCooperateMer);
+            int a = 10 / 0;
+        } catch (Exception e) {
+            logger.error("系统异常", e);
+            throw new Exception("系统异常");
+        }
+    }
+
+    @Override
     public ECooperateMer queryECooperateMerInfo(ECooperateMer eCooperateMer) {
         Optional<ECooperateMer> optDto = Optional.ofNullable(Optional.ofNullable(eCooperateMerMapper.selectECooperateMerInfo(eCooperateMer)).orElseGet(ECooperateMer::new));
         return optDto.get();
     }
 
     @Override
-     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public QueryECooperateMerResponse queryECooperateMerListPage(ECooperateMer eCooperateMer) throws Exception {
         QueryECooperateMerResponse response = new QueryECooperateMerResponse();
         try {

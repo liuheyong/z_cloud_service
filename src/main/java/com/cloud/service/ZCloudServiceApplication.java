@@ -40,11 +40,11 @@ public class ZCloudServiceApplication implements CommandLineRunner {
         //keepRunning();
     }
 
-    @Bean
-    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
-        //return new SqlSessionTemplate(sqlSessionFactory);   // 不使用批处理 SqlSession, 推荐用这种方式
-        return new SqlSessionTemplate(sqlSessionFactory, ExecutorType.BATCH); // 使用批处理 SqlSession, 不推荐用这种方式, 如果主键自增, 批处理方式无法获取到自增的id
-    }
+    //@Bean
+    //public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
+    //    //return new SqlSessionTemplate(sqlSessionFactory);   // 不使用批处理 SqlSession, 推荐用这种方式
+    //    return new SqlSessionTemplate(sqlSessionFactory, ExecutorType.BATCH); // 使用批处理 SqlSession, 不推荐用这种方式, 如果主键自增, 批处理方式无法获取到自增的id
+    //}
 
     /*@PostConstruct
     public void registerInstance() throws NacosException {
