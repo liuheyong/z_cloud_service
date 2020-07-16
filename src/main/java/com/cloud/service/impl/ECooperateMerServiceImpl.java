@@ -66,22 +66,23 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
         try {
             // 批量插入数据测试
             List<ECooperateMer> ecList = new ArrayList<>();
-            for (int i = 0; i < 100000; i++) {
+            for (int i = 0; i < 100; i++) {
                 ECooperateMer mer = new ECooperateMer(UUIDUtil.getUNIDX("EC", 30), "A2019022200000001", "测试数据添加", "1556442573307.jpg", "https://www.baidu.com", "1", 12);
                 ecList.add(mer);
             }
-            SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH, false);
-            ECooperateMerMapper mapper = sqlSession.getMapper(ECooperateMerMapper.class);
+            //SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH, false);
+            //ECooperateMerMapper mapper = sqlSession.getMapper(ECooperateMerMapper.class);
             long startTime = System.currentTimeMillis();
             ecList.stream().forEach(item -> {
-                try {
-                    mapper.addECooperateMerInfo(item);
-                } catch (Exception e) {
-                    sqlSession.rollback();
-                    logger.error(e.getMessage(), e);
-                }
+                //try {
+                eCooperateMerMapper.addECooperateMerInfo(item);
+                //int a = 10 / 0;
+                //} catch (Exception e) {
+                //    sqlSession.rollback();
+                //    logger.error(e.getMessage(), e);
+                //}
             });
-            sqlSession.commit();
+            //sqlSession.commit();
             long endTime = System.currentTimeMillis();
             System.out.println("==============批量插入"+ ecList.size() +"条数据测试耗时==============" + (endTime - startTime));
             logger.info(String.valueOf(RpcContext.getContext().getAttachment("myKey")));
