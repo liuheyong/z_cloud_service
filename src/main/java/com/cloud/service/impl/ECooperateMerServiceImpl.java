@@ -85,7 +85,7 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
             //sqlSession.commit();
             long endTime = System.currentTimeMillis();
             System.out.println("==============批量插入"+ ecList.size() +"条数据测试耗时==============" + (endTime - startTime));
-            logger.info(String.valueOf(RpcContext.getContext().getAttachment("myKey")));
+            //logger.info(String.valueOf(RpcContext.getContext().getAttachment("myKey")));
             List<ECooperateMer> eList = (List<ECooperateMer>) redisTemplate.opsForValue().get("eList");
             if (eList == null) {
                 synchronized (this) {
