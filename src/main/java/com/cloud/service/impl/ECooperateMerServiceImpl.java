@@ -46,7 +46,7 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
     public void addECooperateMerInfo(ECooperateMer eCooperateMer) throws Exception {
         try {
             eCooperateMerMapper.addECooperateMerInfo(eCooperateMer);
-            int a = 10 / 0;
+            //int a = 10 / 0;
         } catch (Exception e) {
             logger.error("系统异常", e);
             throw new Exception("系统异常");
