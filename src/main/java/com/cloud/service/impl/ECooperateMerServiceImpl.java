@@ -46,6 +46,20 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
     public void addECooperateMerInfo(ECooperateMer eCooperateMer) throws Exception {
         try {
             eCooperateMerMapper.addECooperateMerInfo(eCooperateMer);
+            updateECooperateMerInfo(eCooperateMer);
+            //int a = 10 / 0;
+        } catch (Exception e) {
+            logger.error("系统异常", e);
+            throw new Exception("系统异常");
+        }
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = {Exception.class})
+    public void updateECooperateMerInfo(ECooperateMer eCooperateMer) throws Exception {
+        try {
+            eCooperateMer.setAgentMerSeq("A2019022200000002");
+            eCooperateMerMapper.updateECooperateMerInfo(eCooperateMer);
             //int a = 10 / 0;
         } catch (Exception e) {
             logger.error("系统异常", e);
