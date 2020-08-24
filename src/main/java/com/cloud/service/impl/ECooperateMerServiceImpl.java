@@ -55,7 +55,7 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
     @Transactional(propagation = Propagation.NESTED, rollbackFor = {Exception.class})
     public void updateECooperateMerInfo(ECooperateMer eCooperateMer) throws Exception {
         try {
-            eCooperateMer.setCooperateMerSeq("20200821");
+            eCooperateMer.setCooperateMerSeq("ECs5MCxDuS8SnMPmynE8bGn555nN0WyV");
             eCooperateMer.setMerName("A2019022200000002");
             eCooperateMerMapper.updateECooperateMerInfo(eCooperateMer);
             //int a = 10 / 0;
