@@ -1,14 +1,11 @@
 package com.cloud.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.alibaba.dubbo.rpc.RpcContext;
 import com.cloud.commons.dto.ECooperateMer;
 import com.cloud.commons.response.QueryECooperateMerResponse;
 import com.cloud.commons.service.ECooperateMerService;
 import com.cloud.service.mapper.ECooperateMerMapper;
 import com.cloud.service.utils.UUIDUtil;
-import org.apache.ibatis.session.ExecutorType;
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +43,7 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
     public void addECooperateMerInfo(ECooperateMer eCooperateMer) throws Exception {
         try {
             eCooperateMerMapper.addECooperateMerInfo(eCooperateMer);
-            updateECooperateMerInfo(eCooperateMer);
+            updateECooperateMerInfo(new ECooperateMer());
             //int a = 10 / 0;
         } catch (Exception e) {
             logger.error("系统异常", e);
@@ -58,7 +55,8 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
     @Transactional(propagation = Propagation.NESTED, rollbackFor = {Exception.class})
     public void updateECooperateMerInfo(ECooperateMer eCooperateMer) throws Exception {
         try {
-            eCooperateMer.setAgentMerSeq("A2019022200000002");
+            eCooperateMer.setCooperateMerSeq("20200821");
+            eCooperateMer.setMerName("A2019022200000002");
             eCooperateMerMapper.updateECooperateMerInfo(eCooperateMer);
             //int a = 10 / 0;
         } catch (Exception e) {
