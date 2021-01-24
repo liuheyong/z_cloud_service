@@ -4,6 +4,8 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.cloud.commons.dto.ECooperateMer;
 import com.cloud.commons.response.QueryECooperateMerResponse;
 import com.cloud.commons.service.ECooperateMerService;
+import com.cloud.service.SpringUtil;
+import com.cloud.service.aop.AopTest;
 import com.cloud.service.mapper.ECooperateMerMapper;
 import com.cloud.service.utils.UUIDUtil;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -25,7 +27,7 @@ import java.util.concurrent.TimeUnit;
  * @create: 2019-05-27
  * @description: ECooperateMerServiceImpl
  **/
-@Component
+
 @Service(interfaceClass = ECooperateMerService.class, version = "${dubbo.service.version}", timeout = 60000)
 public class ECooperateMerServiceImpl implements ECooperateMerService {
 
@@ -33,6 +35,8 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
 
     @Autowired
     private ECooperateMerMapper eCooperateMerMapper;
+    @Autowired
+    private ECooperateMerService eCooperateMerService;
     @Autowired
     RedisTemplate redisTemplate;
     @Autowired
@@ -43,7 +47,7 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
     public void addECooperateMerInfo(ECooperateMer eCooperateMer) throws Exception {
         try {
             eCooperateMerMapper.addECooperateMerInfo(eCooperateMer);
-            updateECooperateMerInfo(new ECooperateMer());
+            //updateECooperateMerInfo(new ECooperateMer());
             //int a = 10 / 0;
         } catch (Exception e) {
             logger.error("系统异常", e);
