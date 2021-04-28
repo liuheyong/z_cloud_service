@@ -1,4 +1,4 @@
-package com.cloud.service.rpc.clientSub;
+package com.cloud.service.rpc.dubbo.example.clientSub;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

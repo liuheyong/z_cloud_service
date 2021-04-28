@@ -1,8 +1,11 @@
-package com.cloud.service.rpc.clientSub;
+package com.cloud.service.rpc.dubbo.example.clientSub;
 
-import com.cloud.service.rpc.serviceSub.ClassInfo;
+import com.cloud.service.rpc.dubbo.example.serviceSub.ClassInfo;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.*;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -62,5 +65,4 @@ public class NettyRpcProxy {
             }
         });
     }
-
 }

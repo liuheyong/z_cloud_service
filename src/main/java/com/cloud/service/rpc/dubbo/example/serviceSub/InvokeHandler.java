@@ -1,4 +1,4 @@
-package com.cloud.service.rpc.serviceSub;
+package com.cloud.service.rpc.dubbo.example.serviceSub;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -19,14 +19,10 @@ public class InvokeHandler extends ChannelInboundHandlerAdapter {
      * @description: 得到某接口下某个实现类的名字
      */
     private String getImplClassName(ClassInfo classInfo) throws ClassNotFoundException {
-        //服务方接口和实现类所在的包路径
-        String interfacePath = "com.cloud.service.rpc.service";
-        int lastDot = classInfo.getClassName().lastIndexOf(".");
-        String interfaceName = classInfo.getClassName().substring(lastDot);
-        Class<?> superClass = Class.forName(interfacePath + interfaceName);
-        Reflections reflections = new Reflections(interfacePath);
+        Class<?> superClass = Class.forName(classInfo.getClassName());
+        Reflections reflections = new Reflections(classInfo.getClassName().substring(0, classInfo.getClassName().lastIndexOf(".")));
         //得到某接口下的所有实现类
-        Set<Class<?>> ImplClassSet = (Set<Class<?>>) reflections.getSubTypesOf(superClass);
+        Set<Class<?>> ImplClassSet = reflections.getSubTypesOf((Class<Object>) superClass);
         if (ImplClassSet.size() == 0) {
             System.out.println("未找到实现类");
             return null;

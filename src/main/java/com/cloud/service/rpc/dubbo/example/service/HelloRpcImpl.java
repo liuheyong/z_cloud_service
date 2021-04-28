@@ -1,4 +1,4 @@
-package com.cloud.service.rpc.service;
+package com.cloud.service.rpc.dubbo.example.service;
 
 /**
  * @author: HeYongLiu

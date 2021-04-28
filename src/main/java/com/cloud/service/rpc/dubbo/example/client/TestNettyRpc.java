@@ -1,7 +1,8 @@
-package com.cloud.service.rpc.client;
+package com.cloud.service.rpc.dubbo.example.client;
 
-
-import com.cloud.service.rpc.clientSub.NettyRpcProxy;
+import com.cloud.service.rpc.dubbo.example.clientSub.NettyRpcProxy;
+import com.cloud.service.rpc.dubbo.example.service.HelloNetty;
+import com.cloud.service.rpc.dubbo.example.service.HelloRPC;
 
 /**
  * @author: HeYongLiu

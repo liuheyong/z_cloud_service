@@ -1,4 +1,4 @@
-package com.cloud.service.rpc.serviceSub;
+package com.cloud.service.rpc.dubbo.example.serviceSub;
 
 import java.io.Serializable;
 
