@@ -5,8 +5,7 @@
     <parent>
         <groupId>com.cloud.parent</groupId>
         <artifactId>z_cloud_parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../z_cloud_parent/pom.xml</relativePath>
+        <version>1.0.0</version>
     </parent>
 
     <groupId>com.cloud.service</groupId>
@@ -142,13 +141,13 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <executable>true</executable>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+            <!--    <groupId>org.springframework.boot</groupId>-->
+            <!--    <artifactId>spring-boot-maven-plugin</artifactId>-->
+            <!--    <configuration>-->
+            <!--        <executable>true</executable>-->
+            <!--    </configuration>-->
+            <!--</plugin>-->
             <!--添加git-commit-id-plugin 插件,该插件⽤来产⽣git的版本信息-->
             <plugin>
                 <groupId>pl.project13.maven</groupId>
