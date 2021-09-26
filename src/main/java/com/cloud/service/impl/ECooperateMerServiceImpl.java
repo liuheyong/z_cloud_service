@@ -19,9 +19,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -43,18 +45,37 @@ public class ECooperateMerServiceImpl implements ECooperateMerService {
     RedisTemplate redisTemplate;
     @Autowired
     SqlSessionTemplate sqlSessionTemplate;
+    @Resource
+    private Executor taskExecutor;
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRED)
     public void addECooperateMerInfo(ECooperateMer eCooperateMer) throws Exception {
-        try {
-            eCooperateMerMapper.addECooperateMerInfo(eCooperateMer);
-            //updateECooperateMerInfo(new ECooperateMer());
-            //int a = 10 / 0;
-        } catch (Exception e) {
-            logger.error("系统异常", e);
-            throw new Exception("系统异常");
-        }
+        eCooperateMerMapper.addECooperateMerInfo(eCooperateMer);
+        ECooperateMer mer_ = new ECooperateMer(
+                UUIDUtil.getUNIDX("EC", 30),
+                "A2021022200000001",
+                "测试数据添加",
+                "1556442573307.jpg",
+                "https://www.baidu.com",
+                "1",
+                12);
+        eCooperateMerMapper.addECooperateMerInfo(mer_);
+        int a = 10 / 0;
+    }
+
+    @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRED)
+    protected void addECooperateMerInfo_(ECooperateMer eCooperateMer)  {
+        ECooperateMer mer_ = new ECooperateMer(
+                UUIDUtil.getUNIDX("EC", 30),
+                "A2021022200000001",
+                "测试数据添加",
+                "1556442573307.jpg",
+                "https://www.baidu.com",
+                "1",
+                12);
+        eCooperateMerMapper.addECooperateMerInfo(mer_);
+        int a = 10 / 0;
     }
 
     @Override
